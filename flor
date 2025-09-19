@@ -1,0 +1,63 @@
+import turtle
+
+screen = turtle.Screen()
+screen.bgcolor("black")
+
+t=turtle.Turtle()
+t.speed(0)
+t.color("red")
+num_petals = 36
+radius = 300
+angle = 60
+
+colors = ["red", "orange", "yellow", "magenta", "cyan", "lime"] 
+
+for i in range(num_petals):
+    t.color(colors[i % len(colors)])  # esto es para que los colores se vayan repitiendo en la longitud de la lista osea que vayn dandole vueltas y se vayan repitiendo
+    
+    t.penup()
+    t.goto(0, 0)
+    t.pendown()
+
+    t.circle(radius, angle)
+    t.left(180 - angle)
+    t.circle(radius, angle)
+    t.left(180 - angle)
+
+    t.left(360 / num_petals)
+
+for i in range(num_petals):
+    t.color("gold")
+    t.penup()
+    t.goto(0, 0)
+    t.pendown()
+
+    t.circle(90, angle)
+    t.left(180 - angle)
+    t.circle(90, angle)
+    t.left(180 - angle)
+
+    t.left(360 / num_petals)
+
+t.penup()
+t.goto(0,-300)
+t.pendown()
+t.color("silver")
+t.circle(300,360)
+
+
+t.color("purple")
+num_semis = 36   # cuántos semicírculos alrededor
+semi_radius = 30 # radio de los semicírculos
+
+for i in range(num_semis):
+    t.penup()
+    t.goto(0,0)   # volver al centro
+    t.setheading(0)  
+    t.right(360/num_semis * i)  # rotamos
+    t.forward(radius)           # avanzamos hasta el borde del círculo
+    t.pendown()
+    t.circle(semi_radius, 180)  # semicírculo hacia afuera
+
+
+turtle.done()
