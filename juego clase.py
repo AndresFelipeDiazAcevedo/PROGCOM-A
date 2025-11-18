@@ -4,9 +4,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 
-# ======================================================
-#               FUNCIONES UTILITARIAS
-# ======================================================
+
 
 def generar_numero():
     """Genera un número de 4 dígitos sin repetidos."""
@@ -32,9 +30,6 @@ def evaluar(n1, n2):
     return picas, fijas
 
 
-# ======================================================
-#                 APP COMPLETA
-# ======================================================
 
 class PicasFijasApp:
     def __init__(self, root):
@@ -54,9 +49,7 @@ class PicasFijasApp:
 
         self.menu_principal()
 
-    # ======================================================
-    #                     MENÚ PRINCIPAL
-    # ======================================================
+
 
     def menu_principal(self):
         self.limpiar_frame()
@@ -70,9 +63,7 @@ class PicasFijasApp:
         ttk.Button(self.main_frame, text="2️  La máquina adivina",
                    command=self.modo_maquina, width=25).pack(pady=20)
 
-    # ======================================================
-    #                  MODO 1: JUGADOR ADIVINA
-    # ======================================================
+
 
     def modo_jugador(self):
         self.limpiar_frame()
@@ -109,9 +100,7 @@ class PicasFijasApp:
             messagebox.showinfo(" Ganaste", f"El número era {self.secreto}")
             self.menu_principal()
 
-    # ======================================================
-    #               MODO 2: MÁQUINA ADIVINA (CORREGIDO)
-    # ======================================================
+
 
     def modo_maquina(self):
         self.limpiar_frame()
@@ -178,7 +167,6 @@ class PicasFijasApp:
         # mostrar en historial
         self.hist_maquina.insert(tk.END, f"{self.intento_actual} → {p} P | {f} F\n")
 
-        # si encontró el número
         if f == 4:
             messagebox.showinfo(" La máquina ganó",
                                 f"Tu número era {self.intento_actual}")
@@ -189,7 +177,6 @@ class PicasFijasApp:
         if self.intento_actual in self.posibles:
             self.posibles.remove(self.intento_actual)
 
-        # filtrar posibilidades correctas
         nuevas = []
         for num in self.posibles:
             p2, f2 = evaluar(self.intento_actual, num)
@@ -198,17 +185,14 @@ class PicasFijasApp:
 
         self.posibles = nuevas
 
-        # limpiar entradas
+
         self.entry_p.delete(0, tk.END)
         self.entry_f.delete(0, tk.END)
 
-        # reset
         self.intento_actual = None
         self.label_intento.config(text="(Haz clic en Intento)")
 
-    # ======================================================
-    #                  FONDO DEGRADADO
-    # ======================================================
+
 
     def _draw_gradient(self, c1, c2):
         r1, g1, b1 = self.root.winfo_rgb(c1)
@@ -221,18 +205,12 @@ class PicasFijasApp:
             hex_color = f"#{r//256:02x}{g//256:02x}{b//256:02x}"
             self.canvas.create_line(0, i, 520, i, fill=hex_color)
 
-    # ======================================================
-    #                      UTILIDAD
-    # ======================================================
 
     def limpiar_frame(self):
         for widget in self.main_frame.winfo_children():
             widget.destroy()
 
 
-# ======================================================
-#                 EJECUTAR PROGRAMA
-# ======================================================
 
 root = tk.Tk()
 PicasFijasApp(root)
